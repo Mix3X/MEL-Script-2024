@@ -1,1 +1,1 @@
-The First scripts I've made to do a rig
+The First scripts I've made to rig a threadmill
