@@ -1,0 +1,6 @@
+// Get selected object and locator
+string $selectedObject = "nurbsCircle1.cv[" + $number + "]" ;
+string $loc_match = "Tread_0" + $number + "_Loc" ;
+
+  float $locatorPosition[] = `xform -q -ws -t $loc_match`;
+  move $locatorPosition[0] $locatorPosition[1] $locatorPosition[2] $nurb ;

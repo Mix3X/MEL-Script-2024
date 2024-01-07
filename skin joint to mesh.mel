@@ -1,0 +1,17 @@
+float $skinnum = 11 ;
+float $jointnum = 10 ;
+float $skinclusternum = 10;
+
+for( $i=0; $i<34; ++$i )
+{
+    string $skinname = "Tread_" + $skinnum ; // mesh to skin
+    string $jointname = "Tread_" + $jointnum + "_Loc_jnt"; // joint to skin
+    // Perform the skin binding using skinCluster
+    skinCluster -tsb -mi 1 -wt 0 -bm 0 -sm 0 -ns 0 -lw true $skinname $jointname;
+    print ($skinname + "skinned with" + $jointname + "\n");
+    
+     $skinnum += 1 ;
+     $jointnum += 1 ;
+     $skinclusternum += 1;
+    
+}

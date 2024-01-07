@@ -1,0 +1,24 @@
+float $totonum = 1;
+
+
+ select -clear;
+ 
+for( $i=0; $i<9; ++$i )
+{
+    string $toto = "Tread_0" + $totonum + "_Loc_int";
+   
+    select -add $toto;
+     $totonum +=1;
+  
+    
+}
+
+for( $i=0; $i<35; ++$i )
+{
+    string $toto = "Tread_" + $totonum + "_Loc_int";
+   
+    select -add $toto;
+     $totonum +=1;
+  
+    
+};

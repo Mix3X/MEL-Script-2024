@@ -1,0 +1,21 @@
+//integral number to update iteration //
+
+int $number = 1;
+
+// start a loop //
+/for ($number=1; $number <10; ++$number )
+
+{
+  if  ($number <10){
+  
+    string $loc_match = "Tread_0" + $number + "_Loc" ;
+    string $nurb = "nurbsCircle1.cv[" + $number + "]" ;
+    print $loc_match;
+    print $nurb;
+    select -r -sym $nurb ;
+    select -r $loc_match;
+    matchTransform $nurb $loc_match ;
+
+}
+
+};

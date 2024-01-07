@@ -1,0 +1,64 @@
+string $selection[] =  `ls -sl`;
+
+
+int $number = 0;
+float $uvMin = 0;
+float $uvMax = 45;
+
+
+//Loop
+for ($mp in $selection)
+{
+    // empty the selection  
+        select -clear;
+    // create a joint
+        joint -p 0 0 0 -n "joint1"-rad 8;
+    // create a Controlleur
+        circle -n "circle1" -r 20;
+        
+        group -n "group1";
+        select group1;
+        rotate -r -y 90;
+        
+        group -n "group2";
+        
+        polyCube -n "pcube1" -h 2 -w 10 -d 60 ;
+        
+        parentConstraint -mo "circle1" "joint1";
+        parentConstraint -mo "circle1" pcube1;
+        
+        select group2;
+        select -tgl path_crv;
+        pathAnimation -fractionMode true -follow true -followAxis x -upAxis y -worldUpType "objectrotation" -worldUpVector 0 1 0 -inverseUp false -inverseFront false -bank false -startTimeU `playbackOptions -query -minTime` -endTimeU  `playbackOptions -query -maxTime`;
+        connectAttr -force Master_ctrl.turning motionPath1_uValue.input;
+        
+        selectKey -clear;
+        selectKey -add -k -t 0 -t 45 motionPath1_uValue ;
+        keyTangent -itt linear -ott linear;
+        setInfinity -pri cycle;
+        setInfinity -poi cycle;
+        /////
+        
+        keyframe -option over -index 0 -absolute -timeChange $uvMin motionPath1_uValue;
+        keyframe -option over -index 1 -absolute -timeChange $uvMax motionPath1_uValue;
+        
+        string $attached_name = $selection[$number] + "_attached";
+        string $group_offset = $selection[$number] + "_offset";
+        string $circle_name = $selection[$number] + "_ctrl";
+        string $joint_name = $selection[$number] + "_jnt";
+        string $motp_name = $selection[$number] + "_motPath";
+        string $motVal_name = $selection[$number] + "_motVal";
+        string $cube_name = $selection[$number] + "_ref";
+        rename "group1" $group_offset;
+        rename "group2" $attached_name;
+        rename "circle1" $circle_name;
+        rename "joint1" $joint_name;
+        rename motionPath1 $motp_name;
+        rename motionPath1_uValue $motVal_name;
+        rename "pcube1" $cube_name;
+////////////////////////// 
+        $number += 1 ;
+        $uvMin -= 1;
+        $uvMax -= 1;
+    }//end for
+;

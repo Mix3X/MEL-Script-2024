@@ -1,0 +1,34 @@
+//integral number to  iteration //
+
+int $number_tread = 1;
+int $number_nurb = 0;
+
+// start a loop to snap Control Vertex from nurbsCircle1 to Tread //
+for ($number_tread=1; $number_tread <46; ++$number_tread )
+
+{
+  if  ($number_tread <10){ // loop for tread_01 to tread 09
+  
+    string $loc_match = "Tread_0" + $number_tread + "_Loc" ;
+    string $nurb = "nurbsCircle1.cv[" + $number_nurb + "]" ;
+    float $locatorPosition[] = `xform -q -ws -t $loc_match`; // store the position from Tread origin
+    move $locatorPosition[0] $locatorPosition[1] $locatorPosition[2] $nurb ; //snap the Cv to the Tread origin
+    $number_nurb += 1 ;
+    print ($nurb + " snapped to" + $loc_match +"\n")  ;
+
+                          }//end if
+                          
+  else if  ($number_tread >= 10 && $number_tread < 46 ){ // loop for tread_10 to tread 45
+  
+    string $loc_match = "Tread_" + $number_tread + "_Loc" ;
+    string $nurb = "nurbsCircle1.cv[" + $number_nurb + "]" ;
+    float $locatorPosition[] = `xform -q -ws -t $loc_match`;// store the position from Tread origin
+    move $locatorPosition[0] $locatorPosition[1] $locatorPosition[2] $nurb ;//snap the Cv to the Tread origin
+    $number_nurb += 1 ;
+    print ($nurb + " snapped to" + $loc_match +"\n")  ;
+
+                          }//end else if
+
+
+}//end for
+;
